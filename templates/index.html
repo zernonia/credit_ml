@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Credit Approval Predictor</title>
+	<link rel="stylesheet" href="../static/css/style.css">
+
+</head>
+<body>
+	<form id="myForm">
+		<h1>Credit Approval Predictor</h1>
+		<div class="form_body">
+			<div class="form_input">
+				<label for="gender">Gender</label>
+				<select name="gender">
+					<option value="0">Male</option>
+					<option value="1">Female</option>
+				</select>
+			</div>
+			<div class="form_input">
+				<label for="age">Age</label>
+				<input type="number" name="age">
+			</div>
+			<div class="form_input">
+				<label for="debt">Debt ('000)</label>
+				<input type="number" name="debt">
+			</div>
+			<div class="form_input">
+				<label for="married">Married</label>
+				<select name="married">
+					<option value="0">l</option>
+					<option value="1">u</option>
+					<option value="2">y</option>
+				</select>
+			</div>
+			<div class="form_input">
+				<label for="bank">Bank</label>
+				<select name="bank">
+					<option value="0">g</option>
+					<option value="1">gg</option>
+					<option value="2">p</option>
+				</select>	
+			</div>
+			<div class="form_input">
+				<label for="edu">Education</label>
+				<select name="edu">
+					<option value="0">aa</option>
+					<option value="1">c</option>
+					<option value="2">cc</option>
+					<option value="3">d</option>
+					<option value="4">e</option>
+					<option value="5">ff</option>
+					<option value="6">i</option>
+					<option value="7">j</option>
+					<option value="8">k</option>
+					<option value="9">m</option>
+					<option value="10">q</option>
+					<option value="11">r</option>
+					<option value="12">w</option>
+					<option value="13">x</option>
+				</select>	
+			</div>
+			<div class="form_input">
+				<label for="ethnic">Ethnic</label>
+				<select name="ethnic">
+					<option value="0">bb</option>
+					<option value="1">dd</option>
+					<option value="2">ff</option>
+					<option value="3">h</option>
+					<option value="4">j</option>
+					<option value="5">n</option>
+					<option value="6">o</option>
+					<option value="7">v</option>
+					<option value="8">z</option>
+				</select>
+			</div>
+			<div class="form_input">
+				<label for="yearsemp">Years of Employment</label>
+				<input type="number" name="yearsemp">
+			</div>
+			<div class="form_input">
+				<p>Prior Default</p>
+				<input type="radio" name="priordef" id="true" value="1">
+				<label for="true">True</label>
+				<input type="radio" name="priordef" id="false" value="0">
+				<label for="false">False</label>
+			</div>
+			<div class="form_input">
+				<p>Employed</p>
+				<input type="radio" name="employed" id="trueemp" value="1">
+				<label for="trueemp">True</label>
+				<input type="radio" name="employed" id="falseemp" value="0">
+				<label for="falseemp">False</label>
+			</div>
+			<div class="form_input">
+				<label for="creditscore">Credit Score</label>
+				<input type="number" name="creditscore">
+			</div>
+			<div class="form_input">
+				<label for="citizen">Citizen</label>
+				<select name="citizen">
+					<option value="0">g</option>
+					<option value="1">p</option>
+					<option value="2">s</option>
+				</select>
+			</div>
+			<input id="button" type="submit" value="Submit">
+		</div>
+	</form>
+
+	<script>
+		const myForm = document.getElementById('myForm');
+
+		myForm.addEventListener("submit", function(e)
+		{
+			e.preventDefault()
+
+			const formData = new FormData(this);
+
+			fetch('api',{
+				method: 'POST',
+				body: formData
+			})
+			.then(res => {
+				return res.json()
+			})
+			.then(json => {
+				const resJson = json
+				result = resJson.Approved
+				if (result == 1){ 
+					alert("Approved!")
+				}
+				else {
+					alert("Disapproved")			
+				}
+
+				window.location.reload(false)
+			})
+			.catch(e => console.log(e))
+
+		})
+	</script>
+</body>
+</html>

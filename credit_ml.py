@@ -44,4 +44,4 @@ def get_pred():
     return json.dumps({'Approved': approved_pred});
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
